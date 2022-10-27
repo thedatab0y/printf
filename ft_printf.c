@@ -6,7 +6,7 @@
 /*   By: busmanov <busmanov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 18:42:15 by busmanov          #+#    #+#             */
-/*   Updated: 2022/10/23 18:42:58 by busmanov         ###   ########.fr       */
+/*   Updated: 2022/10/27 10:56:33 by busmanov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 int	ft_printf(const char *, ...)
 {
-	
+	dcdc
 }
