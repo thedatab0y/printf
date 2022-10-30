@@ -6,7 +6,7 @@
 /*   By: busmanov <busmanov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 21:15:59 by busmanov          #+#    #+#             */
-/*   Updated: 2022/10/28 23:06:37 by busmanov         ###   ########.fr       */
+/*   Updated: 2022/10/31 00:45:40 by busmanov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@ int		ft_format(va_list list, char f)
 		len += ft_char(va_arg(list,int));
 	else if (f=='s')
 		len += ft_str(va_arg(list,char *));
+	else if (f == 'i' || f == 'd')
+		len += ft_putnbr(va_arg(list,int));
+	else if (f == 'u')
+		len = len + ft_putnbr(va_arg(list,int));
+	//else if ( f == '')
 	return(len);
 }
 
@@ -53,24 +58,68 @@ int		ft_str(char *string)
 int		ft_putnbr(int n)
 {
 	int len;
-	
+
 	len = 0;
 	if (n == -2147483648)
 	{
-		len += write(1, "-2147483648",11);
+		len = len + write(1, "-2147483648",11);
 		return(len);
 	}
-	else if (n < 0)
+	if (n < 0)
 	{
-		len += ft_char('-');
+		len = len + ft_char('-');
 		n = -n;
 	}
-	else if (n >= 10)
+	if (n > 9)
+//we begin to break down the number recursively to 
+//each individual digit, where we will then convert it into
+// a character. so we will going to use a division by 10 and a modulus by 10.
+	{//The division by 10 will take us further 
+	//into the recursion until we finaly reach the very first number in our int.
+		len = len + ft_putnbr(n / 10);
+		len = len + ft_putnbr(n % 10);
+	}//
+	else//'0' = 48 in ASCII. 
+		len = len + ft_char(n + 48);
+	return(len);
+}
+
+int		ft_unsigned(unsigned int nb)
+{
+	int len;
+
+	len = 0;
+	if (nb > 9)
 	{
-		len += ft_putnbr(n/10);
-		len += ft_putnbr(n % 10);
+		len = len + ft_putnbr(nb / 10);
+		len = len + ft_putnbr(nb % 10);
 	}
 	else
-		len += ft_char(len + '0');
+	{ //convert the num into char value
+		len = len + ft_char(nb + 48);
+	}
 	return(len);
+}
+
+int ft_hex_len(int nb)
+{
+	int len;
+
+	len = 0;
+	if (nb == 0)
+		return(1);
+	if ( nb != 0)
+	{
+		len++;
+		nb = nb / 16;
+	}
+	return(len);
+}
+
+int ft_hex()
+{
+	if (digit_value > 9 && digit_value < 16)
+	{
+		
+	}
 }

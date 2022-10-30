@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: busmanov <busmanov@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: busmanov <busmanov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 18:42:15 by busmanov          #+#    #+#             */
-/*   Updated: 2022/10/27 21:33:52 by busmanov         ###   ########.fr       */
+/*   Updated: 2022/10/30 12:06:30 by busmanov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 //the first argument is a string of placeholders in some sequence, like d or u
 //knowing how many placeholders are there is sth good and i can go through it based on that one at a time
 //for that, i need strlen
+//What is this ...? It’s a special token which marks the function as variadic, meaning that call sites can
+// pass an arbitrary list of values following the named parameters.
 int	ft_printf(const char *placeholders, ...)
 {
 	int		len;
@@ -30,11 +32,11 @@ int	ft_printf(const char *placeholders, ...)
 	{
 		if(placeholders[x] == '%')
 		{
-			len += ft_format(list ,placeholders[x + 1]);
+			len = len + ft_format(list ,placeholders[x + 1]);
 			x++;
 		}
 		else
-			len += write(1,&placeholders[x],1);
+			len = len + write(1,&placeholders[x],1);
 		x++;
 	}
 	va_end(list);
