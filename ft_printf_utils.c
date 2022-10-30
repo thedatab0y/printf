@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: busmanov <busmanov@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: busmanov <busmanov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 21:15:59 by busmanov          #+#    #+#             */
-/*   Updated: 2022/10/27 22:16:55 by busmanov         ###   ########.fr       */
+/*   Updated: 2022/10/28 23:06:37 by busmanov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,3 +50,27 @@ int		ft_str(char *string)
 	return(len);
 }
 
+int		ft_putnbr(int n)
+{
+	int len;
+	
+	len = 0;
+	if (n == -2147483648)
+	{
+		len += write(1, "-2147483648",11);
+		return(len);
+	}
+	else if (n < 0)
+	{
+		len += ft_char('-');
+		n = -n;
+	}
+	else if (n >= 10)
+	{
+		len += ft_putnbr(n/10);
+		len += ft_putnbr(n % 10);
+	}
+	else
+		len += ft_char(len + '0');
+	return(len);
+}

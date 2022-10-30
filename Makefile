@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: busmanov <busmanov@student.42wolfsburg.    +#+  +:+       +#+         #
+#    By: busmanov <busmanov@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/25 20:14:18 by busmanov          #+#    #+#              #
-#    Updated: 2022/10/27 22:19:54 by busmanov         ###   ########.fr        #
+#    Updated: 2022/10/28 23:01:03 by busmanov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ OBJ = ${SRC:.c=.o}
 
 all:${NAME}
 
-${NAME} : ${OBJ}
+${NAME}
 	${CC} ${CLAGS} -c ${SRC}
 	ar rc ${NAME} ${OBJ}
 	ranlib ${NAME}
@@ -38,4 +38,3 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re
-
