@@ -102,7 +102,7 @@ int		ft_unsigned(unsigned int nb)
 		len = len + ft_unsigned(nb % 10);
 	}
 	else
-	{ //convert the num into char value
+	{ //convert the num nb into char value
 		len = len + ft_char(nb + 48);
 	}
 	return (len);
