@@ -113,7 +113,7 @@ int ft_hex(unsigned int nb,const char spot)
 	int len;
 
 	len = 0;
-	if (nb >= 16)
+	if (nb >= 16)//f is at 15
 	{
 		len = len + ft_hex(nb / 16, spot);
 		len = len + ft_hex(nb % 16, spot);
