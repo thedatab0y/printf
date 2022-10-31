@@ -6,37 +6,35 @@
 /*   By: busmanov <busmanov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/31 01:58:22 by busmanov          #+#    #+#             */
-/*   Updated: 2022/10/31 02:02:51 by busmanov         ###   ########.fr       */
+/*   Updated: 2022/10/31 03:34:52 by busmanov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int ft_ptr(unsigned long nb)
+int	ft_ptr(unsigned long nb)
 {
-	int len;
+	int	len;
 
 	len = 0;
 	if (nb < 10)
 		len = len + ft_char(nb + 48);
 	else if (nb < 16)
 		len = len + ft_char(nb + 'a' - 10);
-	else 
+	else
 	{
-		len = len + ft_ptr(nb/16);
-		len = len + ft_ptr(nb%16);
+		len = len + ft_ptr(nb / 16);
+		len = len + ft_ptr(nb % 16);
 	}
-	
-	return(len);
+	return (len);
 }
 
-int ft_pri_ptr(unsigned long nb)
+int	ft_pri_ptr(unsigned long nb)
 {
-	int len;
+	int	len;
 
 	len = 0;
-	len = len + write(1,"0x",2);
-	len = len + ft_ptr(nb);
-	return(len);
-	
+	write(1,"0x",2);
+	ft_ptr(nb);
+	return (len);
 }

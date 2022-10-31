@@ -6,7 +6,7 @@
 /*   By: busmanov <busmanov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 18:42:15 by busmanov          #+#    #+#             */
-/*   Updated: 2022/10/30 12:06:30 by busmanov         ###   ########.fr       */
+/*   Updated: 2022/10/31 03:35:29 by busmanov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,13 @@ int	ft_printf(const char *placeholders, ...)
 	va_list list;
 
 	len = 0;
-	x 	= 0;
+	x	= 0;
 	va_start(list,placeholders);
-	while(placeholders[x] != '\0')
+	if (!placeholders)
+		return(0);
+	while (placeholders[x] && placeholders[x] != '\0')
 	{
-		if(placeholders[x] == '%')
+		if (placeholders[x] == '%')
 		{
 			len = len + ft_format(list ,placeholders[x + 1]);
 			x++;
@@ -40,5 +42,5 @@ int	ft_printf(const char *placeholders, ...)
 		x++;
 	}
 	va_end(list);
-	return(len);
+	return (len);
 }
