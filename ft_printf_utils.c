@@ -6,7 +6,7 @@
 /*   By: busmanov <busmanov@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 21:15:59 by busmanov          #+#    #+#             */
-/*   Updated: 2022/10/31 00:45:40 by busmanov         ###   ########.fr       */
+/*   Updated: 2022/10/31 02:23:30 by busmanov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,12 @@ int		ft_format(va_list list, char f)
 		len += ft_putnbr(va_arg(list,int));
 	else if (f == 'u')
 		len = len + ft_putnbr(va_arg(list,int));
-	//else if ( f == '')
+	else if ( f == 'x' || f == 'X')
+		len = len + ft_putnbr(va_arg(list,int));
+	else if (f == 'p')
+		len = len + ft_pri_ptr(va_arg(list,unsigned long));
+	else if ( f == '%')
+		len = len + ft_char('%');
 	return(len);
 }
 
@@ -101,25 +106,29 @@ int		ft_unsigned(unsigned int nb)
 	return(len);
 }
 
-int ft_hex_len(int nb)
+int ft_hex(unsigned int nb,char spot)
 {
 	int len;
 
 	len = 0;
-	if (nb == 0)
-		return(1);
-	if ( nb != 0)
+	if (nb >= 16)
 	{
-		len++;
-		nb = nb / 16;
+		len = len + ft_hex(nb / 16, spot);
+		len = len + ft_hex(nb % 16, spot);
+	}
+	else
+	{
+		if (nb <= 9)
+			len = len + ft_char(nb + 48);
+		else if (spot == 'x')
+		{
+			len = len + ft_char(nb + 'x' - 10);
+		}
+		else if (spot  == 'X')
+		{
+			len = len + ft_char(nb + 'X' - 10);
+		}
+
 	}
 	return(len);
-}
-
-int ft_hex()
-{
-	if (digit_value > 9 && digit_value < 16)
-	{
-		
-	}
 }

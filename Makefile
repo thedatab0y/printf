@@ -6,7 +6,7 @@
 #    By: busmanov <busmanov@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/25 20:14:18 by busmanov          #+#    #+#              #
-#    Updated: 2022/10/28 23:01:03 by busmanov         ###   ########.fr        #
+#    Updated: 2022/10/31 02:19:13 by busmanov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,16 +18,16 @@ RM = rm -f
 
 CFLAGS = -Wall -Wextra -Werror
 
-SRC = ft_printf.c ft_printf_utils.c main.c \
+SRC = ft_printf.c ft_printf_utils.c ft_pointer.c
 
-OBJ = ${SRC:.c=.o}
+HEADER = ft_printf.h
+
+OBJ = ${SRC:%.c=%.o}
+
+${NAME} : ${OBJ} ${HEADER}
+	ar rcs ${NAME} ${OBJ}
 
 all:${NAME}
-
-${NAME}
-	${CC} ${CLAGS} -c ${SRC}
-	ar rc ${NAME} ${OBJ}
-	ranlib ${NAME}
 
 clean:
 	${RM} ${OBJ}
@@ -38,3 +38,4 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re
+
