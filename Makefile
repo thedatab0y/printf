@@ -12,20 +12,23 @@
 
 NAME = libftprintf.a
 
+SRC = ft_printf.c ft_printf_utils.c ft_ptr_hex.c
+
 CC = gcc
 
 RM = rm -f
 
 CFLAGS = -Wall -Wextra -Werror
 
-SRC = ft_printf.c ft_printf_utils.c ft_pointer.c
-
-HEADER = ft_printf.h
+COMPILE = $(CC) $(CFLAGS) -c
 
 OBJ = ${SRC:%.c=%.o}
 
-${NAME} : ${OBJ} ${HEADER}
-	ar rcs ${NAME} ${OBJ}
+%.o: .%c
+	$(COMPILE) $< -o >@
+
+${NAME} : ${OBJ}
+	ar rs ${NAME} ${OBJ}
 
 all:${NAME}
 
@@ -33,7 +36,7 @@ clean:
 	${RM} ${OBJ}
 
 fclean: clean
-	${RM} ${NAME}
+	${RM} ${NAME} 
 
 re: fclean all
 
