@@ -34,7 +34,7 @@ int	ft_pri_ptr(unsigned long nb)
 	int	len;
 
 	len = 0;
-	write(1,"0x",2);
-	ft_ptr(nb);
+	len = len + write(1,"0x",2);
+	len = len + ft_ptr(nb);
 	return (len);
 }
